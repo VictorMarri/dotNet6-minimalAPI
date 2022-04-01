@@ -5,8 +5,8 @@ namespace CatalogoApi.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Produto>? Produtos { get; set; }
-        public DbSet<Categoria>? Categorias { get; set; }
+        public DbSet<ProdutoModel>? Produtos { get; set; }
+        public DbSet<CategoriaModel>? Categorias { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
         {
@@ -15,18 +15,18 @@ namespace CatalogoApi.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Propriedades
-            modelBuilder.Entity<Categoria>().HasKey(x => x.IdCategoria);
-            modelBuilder.Entity<Categoria>().Property(x => x.Nome).HasMaxLength(100).IsRequired();
-            modelBuilder.Entity<Categoria>().Property(x => x.Descricao).HasMaxLength(150).IsRequired();
+            modelBuilder.Entity<CategoriaModel>().HasKey(x => x.IdCategoria);
+            modelBuilder.Entity<CategoriaModel>().Property(x => x.Nome).HasMaxLength(100).IsRequired();
+            modelBuilder.Entity<CategoriaModel>().Property(x => x.Descricao).HasMaxLength(150).IsRequired();
 
-            modelBuilder.Entity<Produto>().HasKey(x => x.IdProduto);
-            modelBuilder.Entity<Produto>().Property(x => x.Nome).HasMaxLength(100).IsRequired();
-            modelBuilder.Entity<Produto>().Property(x => x.Descricao).HasMaxLength(150);
-            modelBuilder.Entity<Produto>().Property(x => x.ImagemUrl).HasMaxLength(100);
-            modelBuilder.Entity<Produto>().Property(x => x.Preco).HasPrecision(14,2);
+            modelBuilder.Entity<ProdutoModel>().HasKey(x => x.IdProduto);
+            modelBuilder.Entity<ProdutoModel>().Property(x => x.Nome).HasMaxLength(100).IsRequired();
+            modelBuilder.Entity<ProdutoModel>().Property(x => x.Descricao).HasMaxLength(150);
+            modelBuilder.Entity<ProdutoModel>().Property(x => x.ImagemUrl).HasMaxLength(100);
+            modelBuilder.Entity<ProdutoModel>().Property(x => x.Preco).HasPrecision(14,2);
 
             //Relacionamentos
-            modelBuilder.Entity<Produto>().HasOne(x => x.Categoria).WithMany(x => x.Produtos).HasForeignKey(x => x.IdCategoria);
+            modelBuilder.Entity<ProdutoModel>().HasOne(x => x.Categoria).WithMany(x => x.Produtos).HasForeignKey(x => x.IdCategoria);
         }
     }
 }

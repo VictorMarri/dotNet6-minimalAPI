@@ -1,6 +1,6 @@
 ﻿namespace CatalogoApi.Models
 {
-    public class Produto
+    public class ProdutoModel
     {
         public Guid IdProduto { get; set; }
         public Guid IdCategoria { get; set; }
@@ -11,7 +11,7 @@
         public DateTime DataCompra { get; set; }
         public int Estoque { get; set; }
 
-        public Categoria? Categoria { get; set; }
+        public CategoriaModel? Categoria { get; set; }
 
     }
 }
